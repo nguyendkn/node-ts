@@ -1,6 +1,4 @@
-import {
-  loggerService,
-} from "./../Services/LoggerService";
+import { loggerService } from "./../Services/LoggerService";
 import { Request, Response } from "express";
 import {
   HttpGet,
@@ -8,20 +6,34 @@ import {
   HttpPut,
   HttpDelete,
 } from "../Decorators/RouterDecorator";
+import "../Extensions/StringExtensions";
+import Product from "../Aggregates/ProductAggregate/Product";
 
 const controller = "product";
 
 export class ProductController {
   @HttpGet(controller, "get")
-  public get(req: Request, res: Response): void {
+  public async get(req: Request, res: Response) {
     const { id } = req.query;
     if (id) {
-      loggerService().log(`Product: ${id}`);
+      const product = await Product.findById(id);
+      loggerService().log(`Product: ${product.id}`);
       res.send(`Product: ${id}`);
     } else {
       loggerService().log(`Products`);
       res.send(`Products`);
     }
+  }
+
+  @HttpGet(controller, "list")
+  public async list(req: Request, res: Response) {
+    const { pageIndex, pageSize } = req.query;
+    const products = await Product.find({})
+      .skip(
+        ((pageIndex as string).parseInt() - 1) * (pageSize as string).parseInt()
+      )
+      .limit((pageSize as string).parseInt());
+    res.send(products);
   }
 
   @HttpPost(controller, "create")

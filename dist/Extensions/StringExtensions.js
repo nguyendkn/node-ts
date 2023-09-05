@@ -7,4 +7,7 @@ String.prototype.reverse = function () {
 String.prototype.route = function (path) {
     return "/" + path + "/";
 };
+String.prototype.parseInt = function () {
+    return Number(this);
+};
 //# sourceMappingURL=StringExtensions.js.map

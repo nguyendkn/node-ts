@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 
 import express, { Express } from "express";
 import { services } from "./Extensions/DependencyInjection";

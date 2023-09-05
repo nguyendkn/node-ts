@@ -2,6 +2,7 @@ interface String {
   capitalize(): string;
   reverse(): string;
   route(path: string): string;
+  parseInt(): number;
 }
 
 String.prototype.capitalize = function () {
@@ -14,4 +15,8 @@ String.prototype.reverse = function () {
 
 String.prototype.route = function (path: string) {
   return "/" + path + "/";
+};
+
+String.prototype.parseInt = function () {
+  return Number(this);
 };
