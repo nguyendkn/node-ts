@@ -1,0 +1,5 @@
+{
+  "ignore": ["node_modules/", "logs/", "other-dir-to-ignore/"],
+  "watch": ["src/"],
+  "ext": "ts"
+}
