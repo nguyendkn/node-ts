@@ -1,8 +1,4 @@
-import "reflect-metadata";
-
 export const Routes = [];
-
-const ROUTE_PREFIX_METADATA_KEY = Symbol("route-prefix");
 
 function routeBinder(method: string) {
   return function (route: string, path: string) {
@@ -11,6 +7,7 @@ function routeBinder(method: string) {
         method,
         path: "/" + route + "/" + path,
         handler: target[key],
+        contructor: target.constructor,
       });
     };
   };

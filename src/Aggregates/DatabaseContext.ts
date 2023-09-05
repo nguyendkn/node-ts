@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-class Database {
+class DatabaseContext {
   private URI: string;
 
   constructor(URI: string) {
@@ -18,4 +18,4 @@ class Database {
   }
 }
 
-export default Database;
+export default DatabaseContext;

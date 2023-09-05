@@ -1,36 +1,41 @@
+import {
+  loggerService,
+} from "./../Services/LoggerService";
 import { Request, Response } from "express";
 import {
   HttpGet,
   HttpPost,
   HttpPut,
   HttpDelete,
-} from "../decorators/RouterDecorator";
+} from "../Decorators/RouterDecorator";
 
-const prefix = "product";
+const controller = "product";
 
 export class ProductController {
-  @HttpGet(prefix, "get")
+  @HttpGet(controller, "get")
   public get(req: Request, res: Response): void {
     const { id } = req.query;
     if (id) {
+      loggerService().log(`Product: ${id}`);
       res.send(`Product: ${id}`);
     } else {
+      loggerService().log(`Products`);
       res.send(`Products`);
     }
   }
 
-  @HttpPost(prefix, "create")
+  @HttpPost(controller, "create")
   public create(req: Request, res: Response): void {
     res.send("Product created!");
   }
 
-  @HttpPut(prefix, ":id")
+  @HttpPut(controller, ":id")
   public update(req: Request, res: Response): void {
     const productId = req.params.id;
     res.send(`Product with ID: ${productId} updated`);
   }
 
-  @HttpDelete(prefix, "/:id")
+  @HttpDelete(controller, "/:id")
   public delete(req: Request, res: Response): void {
     const productId = req.params.id;
     res.send(`Product with ID: ${productId} deleted`);
